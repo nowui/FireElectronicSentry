@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="css/amazeui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="js/amazeui.min.js"></script>
+		<script type="text/javascript" src="js/jockey.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<style type="text/css">
+			#container {
+	            width:100%;
+	            height:100%;
+	            max-width: 750px;
+	            min-width: 300px;
+	            margin:0 auto;
+	        }
+		</style>
+    </head>
+    <body>
+    	<div id="container" class="am-padding">
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd"><h3 class="am-panel-title">巡查区域</h3></div>
+				<div class="am-panel-bd">
+					<select id="task_area" style="width: 100%;">
+					</select>
+				</div>
+			</div>
+
+			<p>
+
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd"><h3 class="am-panel-title">巡查项</h3></div>
+				<div class="am-panel-bd" id="task_item_div">
+					<!--<div class="am-checkbox">
+    					<label>
+        					<input name="task_item" type="checkbox" value="1"> 复选框，选我选我选我
+    					</label>
+    				</div>
+					<p>
+					<div class="am-checkbox">
+    					<label>
+        					<input name="task_item" type="checkbox" value="2"> 复选框，选我选我选我
+    					</label>
+    				</div>
+					<p>
+					<div class="am-checkbox">
+    					<label>
+        					<input name="task_item" type="checkbox" value="3"> 复选框，选我选我选我
+    					</label>
+    				</div>-->
+				</div>
+			</div>
+
+			<p>
+
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd"><h3 class="am-panel-title">开始时间</h3></div>
+				<div class="am-panel-bd">
+					<input type="text" id="task_start_date" class="am-hide2" style="width: 49%;" data-am-datepicker readonly />
+					<select id="task_start_time" style="width: 49%;"></select>
+				</div>
+			</div>
+
+			<p>
+
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd"><h3 class="am-panel-title">结束时间</h3></div>
+				<div class="am-panel-bd">
+					<input type="text" id='task_end_date' class="am-hide2" style="width: 49%;" data-am-datepicker readonly />
+					<select id="task_end_time" style="width: 49%;"></select>
+				</div>
+			</div>
+
+			<p>
+
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd"><h3 class="am-panel-title">计划类型</h3></div>
+				<div class="am-panel-bd">
+					<div class="am-radio">
+						<label>
+        					<input type="radio" name="task_type" value="1" checked> 日计划
+						</label>
+    				</div>
+					<p>
+					<div class="am-radio">
+						<label>
+        					<input type="radio" name="task_type" value="2"> 周计划
+						</label>
+    				</div>
+					<p>
+					<div class="am-radio">
+						<label>
+        					<input type="radio" name="task_type" value="3"> 月计划
+						</label>
+    				</div>
+				</div>
+			</div>
+
+			<p>
+
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd"><h3 class="am-panel-title">具体位置</h3></div>
+				<div class="am-panel-bd">
+					<input type='text' id="task_postion" class='am-form-field' id='sy_value'></input>
+				</div>
+			</div>
+
+			<p>
+
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd"><h3 class="am-panel-title">描述</h3></div>
+				<div class="am-panel-bd">
+					<textarea rows="3" id='task_remark' style="width: 100%;"></textarea>
+				</div>
+			</div>
+
+			<p>
+
+			<button id="save" class="am-btn am-btn-primary am-margin-top am-center" style="width:96%;">确定</button>
+
+    	</div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    $(function() {
+    	urlString = "/task_add.html";
+
+		var object = new Object();
+
+    	Jockey.on(EventInitMap + "-" + urlString, function(payload) {
+    		console.log(payload);
+
+    		object.deptID = payload.departmentId;
+    		object.patrolScheduleID = payload.patrolScheduleID;
+
+			load();
+		});
+
+    	for(var i = 0; i < 24; i++) {
+    		var s;
+
+    		if(i < 10) {
+    			s = "0" + i;
+    		} else {
+    			s = i;
+    		}
+
+    		$("#task_start_time").append("<option value='" + s + ":00'>" + s + ":00</option>");
+    		$("#task_start_time").append("<option value='" + s + ":30'>" + s + ":30</option>");
+
+    		$("#task_end_time").append("<option value='" + s + ":00'>" + s + ":00</option>");
+    		$("#task_end_time").append("<option value='" + s + ":30'>" + s + ":30</option>");
+    	}
+
+		$("#save").click(function() {
+			var message = "";
+
+			object.subDeptID = $("#task_area").val();
+			if(!object.subDeptID) {
+            	message += "巡区域不能为空\n";
+			}
+
+			object.patrolItemIDs = [];
+			var temp = document.getElementsByName("task_item");
+             for(var i = 0; i < temp.length; i++) {
+             	if(temp[i].checked) {
+            		object.patrolItemIDs.push(temp[i].value);
+             	}
+            };
+            if(object.patrolItemIDs.length == 0) {
+            	message += "巡查项不能为空\n";
+            }
+
+			object.task_start_date = $("#task_start_date").val();
+			if(object.task_start_date == "") {
+            	message += "开始时间不能为空\n";
+			}
+
+			object.task_end_date = $("#task_end_date").val();
+			if(object.task_end_date == "") {
+            	message += "结束时间不能为空\n";
+			}
+
+			var task_start_time = $("#task_start_time").val();
+			var task_end_time = $("#task_end_time").val();
+			var start = new Date((object.task_start_date + " " + task_start_time).replace("-", "/").replace("-", "/"));
+			var end = new Date((object.task_end_date + " " + task_end_time).replace("-", "/").replace("-", "/"));
+			if(start >= end) {
+				message += "开始时间应该小于结束时间!\n";
+			} else {
+
+			}
+
+			object.startDatetime = object.task_start_date + " " + task_start_time + ":00";
+			object.endDatetime = object.task_end_date + " " + task_end_time + ":00";
+
+			object.eventType = $("input[name='task_type']:checked").val();
+
+			object.location = $("#task_postion").val();
+
+			object.descrition = $("#task_remark").val();
+
+            if(message != "") {
+				Jockey.send(EventShowAlert + "-" + urlString, {
+					content: message
+				});
+    		} else {
+    			/*$("#task_remark").val(JSON.stringify({
+							patrolSubDeptID: object.patrolSubDeptID,
+							deptID: object.deptID,
+							subDeptID: object.subDeptID,
+							eventType: object.eventType,
+							startDatetime: object.startDatetime.getTime(),
+							endDatetime: object.endDatetime.getTime(),
+							location: object.location,
+							descrition: object.descrition,
+							patrolItemIDs: object.patrolItemIDs.toString()
+
+						}));
+
+    			return;*/
+
+    			console.log(JSON.stringify({
+						datetime: "2015-08-20 06:28:29",
+						key: "BDEE4FF001E1AE4B8B42B2004F7E1C0B",
+						data: {
+							patrolScheduleID: object.patrolScheduleID,
+							deptID: object.deptID,
+							subDeptID: object.subDeptID,
+							eventType: object.eventType,
+							startDatetime: object.startDatetime,
+							endDatetime: object.endDatetime,
+							location: object.location,
+							descrition: object.descrition,
+							patrolItemIDs: object.patrolItemIDs.toString().replaceAll(",", "|")
+
+						}
+					}));
+
+    			$.ajax({
+					type: "POST",
+					url: "/OA/MobilePatrolScheduleService.ashx?method=" + (object.patrolScheduleID == "0" ? "add" : "update"),
+					contentType: "application/json;charset=utf-8",
+					data: JSON.stringify({
+						datetime: "2015-08-20 06:28:29",
+						key: "BDEE4FF001E1AE4B8B42B2004F7E1C0B",
+						data: {
+							patrolScheduleID: object.patrolScheduleID,
+							deptID: object.deptID,
+							subDeptID: object.subDeptID,
+							eventType: object.eventType,
+							startDatetime: object.startDatetime,
+							endDatetime: object.endDatetime,
+							location: object.location,
+							descrition: object.descrition,
+							patrolItemIDs: object.patrolItemIDs.toString().replaceAll(",", "|")
+
+						}
+					}),
+					dataType: "json",
+					success: function(json) {
+						console.log(JSON.stringify(json));
+
+						if(json.result == 1) {
+							Jockey.send(EventBackCallback + "-" + urlString, {});
+						} else {
+							alert("发送错误, 请与管理员联系!");
+						}
+					},
+					error: function() {
+
+					}
+				});
+    		}
+		});
+
+		var save = function() {
+			$.ajax({
+				type: "POST",
+				url: "/OA/MobilePatrolScheduleService.ashx?method=list",
+				contentType: "application/json;charset=utf-8",
+				data: JSON.stringify({
+					datetime: "2015-08-20 06:28:29",
+					key: "BDEE4FF001E1AE4B8B42B2004F7E1C0B",
+					data: {
+						userID: 414,
+						selectDay: "2015-08-20"
+					}
+				}),
+				dataType: "json",
+				success: function(json) {
+					alert(JSON.stringify(json));
+				},
+				error: function() {
+
+				}
+			});
+		}
+
+		var load = function() {
+			console.log(JSON.stringify({
+					datetime: "2015-08-20 06:28:29",
+					key: "BDEE4FF001E1AE4B8B42B2004F7E1C0B",
+					data: {
+						deptID: object.deptID
+					}
+				}));
+
+			$.ajax({
+				type: "POST",
+				url: "/OA/MobilePatrolScheduleService.ashx?method=patrolItemList",
+				contentType: "application/json;charset=utf-8",
+				data: JSON.stringify({
+					datetime: "2015-08-20 06:28:29",
+					key: "BDEE4FF001E1AE4B8B42B2004F7E1C0B",
+					data: {
+						deptID: object.deptID
+					}
+				}),
+				dataType: "json",
+				success: function(json) {
+					console.log(JSON.stringify(json));
+
+					if(json.result == 1) {
+						patrolParentItemList = json.data.patrolParentItemList;
+
+						if(patrolParentItemList.length > 0) {
+							for(var i = 0; i < patrolParentItemList.length; i++) {
+							var patrolParentItem = patrolParentItemList[i];
+
+		    					$("#task_area").append("<option value='" + patrolParentItem.patrolSubDeptID + "'>" + patrolParentItem.patrolSubDeptName + "</option>");
+							}
+
+							$("#task_area").change(function() {
+								checke($("#task_area").val());
+							});
+
+							var patrolSubDeptID = patrolParentItemList[0].patrolSubDeptID;
+							checke(patrolSubDeptID);
+						}
+					}
+
+					Jockey.send(EventHideLoading + "-" + urlString, {});
+				},
+				error: function() {
+
+				}
+			});
+		}
+
+		checke = function(patrolSubDeptID) {
+			$("#task_item_div").html("");
+
+			var task_item_div_html = "";
+
+			for(var i = 0; i < patrolParentItemList.length; i++) {
+				var patrolParentItem = patrolParentItemList[i];
+
+	    		if(patrolSubDeptID == patrolParentItem.patrolSubDeptID) {
+
+					var patrolItemList = patrolParentItem.patrolItemList;
+
+		    		for(var k = 0; k < patrolItemList.length; k++) {
+						var patrolItem = patrolItemList[k];
+
+			    		task_item_div_html += '<div class="am-checkbox">';
+						task_item_div_html += '	<label>';
+	        			task_item_div_html += '		<input type="checkbox" name="task_item" value="' + patrolItem.patrolItemID + '&' + patrolItem.deptPatrolID + '"> ' + patrolItem.patrolItemName;
+						task_item_div_html += '	</label>';
+	    				task_item_div_html += '</div>';
+						task_item_div_html += '<p>';
+					}
+	    		}
+
+			}
+
+
+			$("#task_item_div").html(task_item_div_html);
+
+		}
+	});
+</script>

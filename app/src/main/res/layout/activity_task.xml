@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="fill_parent" tools:context=".TaskActivity"
+    android:background="#ffffff"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:title="@string/app_name"
+        android:background="@color/title_background_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/weatherTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/surfaceView"
+        android:gravity="center|center_vertical|center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/textView2"
+        android:background="#ffffff"
+        />
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/GridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="auto_fit"
+        android:columnWidth="206px"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="190px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="51px"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="51px"
+        android:background="#ffffff"
+        >
+    </GridView>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="130px"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/text_color"
+        android:gravity="center"
+        />
+
+</RelativeLayout>

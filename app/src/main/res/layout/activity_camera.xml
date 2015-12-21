@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="fill_parent" tools:context=".CameraActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:title="@string/app_name"
+        android:background="@color/title_background_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/weatherTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/surfaceView"
+        android:gravity="center|center_vertical|center_horizontal" />
+
+
+    <SurfaceView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/surfaceView" />
+
+    <Button
+        android:layout_width="430px"
+        android:layout_height="120px"
+        android:text="@string/camera_button"
+        android:id="@+id/loginButton"
+        android:textSize="38px"
+        android:layout_marginBottom="132dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

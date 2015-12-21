@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="attendance_values">
+        <item>上班</item>
+        <item>下班</item>
+    </string-array>
+
+    <string-array name="setting_values">
+        <item>重置单位</item>
+        <item>重置RFID</item>
+        <item>系统更新记录</item>
+    </string-array>
+
+    <string-array name="admin_setting_values">
+        <item>重置单位</item>
+        <item>重置RFID</item>
+        <item>上班</item>
+        <item>下班</item>
+        <item>退出系统</item>
+    </string-array>
+
+</resources>

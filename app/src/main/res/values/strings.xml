@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">上海消防</string>
+
+    <string name="pull">下拉刷新</string>
+    <string name="release">释放刷新</string>
+    <string name="refreshing">正在加载中...</string>
+    <string name="update">最后更新:</string>
+    <string name="load_error">网络繁忙,请稍后再试!</string>
+    <string name="load_error_tips">出现错误啦, 请与管理员联系!</string>
+
+    <string name="icon_font">icomoon.ttf</string>
+
+    <string name="icon_back">&#xe66c;</string>
+
+    <string name="qr_code_prompt">扫描二维码</string>
+
+    <string name="main_button_photo_login">拍照并且登录</string>
+
+    <string name="dialog_title_wait">请稍等</string>
+
+    <string name="dialog_title_tips">系统提示</string>
+
+    <string name="dialog_title_employee">人员选项</string>
+
+    <string name="dialog_title_attendance">考勤选项</string>
+
+    <string name="dialog_title_setting">设置选项</string>
+
+    <string name="dialog_agree">确定</string>
+
+    <string name="button_employee">选择人员</string>
+
+    <string name="toast_employee">请选择人员</string>
+
+    <string name="no_nfc">No NFC found on this device</string>
+
+    <string name="open_nfc">NFC is not enabled. Please go to the wireless settings to enable it.</string>
+
+    <string name="camera_button">拍照</string>
+
+    <string name="remark_text_hint">请输入异常的情况</string>
+
+    <string name="remark_button_start">开始录音</string>
+
+    <string name="remark_button_stop">停止录音</string>
+
+    <string name="remark_button_play">播放录音</string>
+
+    <string name="remark_button_submit">确定并且返回</string>
+
+    <string name="attendance_button">打卡</string>
+</resources>

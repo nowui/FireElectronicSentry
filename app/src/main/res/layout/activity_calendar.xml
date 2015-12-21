@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    tools:context=".CalendarActivity"
+    android:background="#ffffff">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:title="@string/app_name"
+        android:background="@color/title_background_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/weatherTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/surfaceView"
+        android:gravity="center|center_vertical|center_horizontal" />
+
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/todayTextView"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="40px"
+            android:background="#ea5245"
+            />
+
+        <ImageButton
+            android:layout_width="77px"
+            android:layout_height="80px"
+            android:id="@+id/calendar_tab_02ImageButton"
+            android:background="@drawable/calendar_tab_02"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40px" />
+
+        <ImageButton
+            android:layout_width="74px"
+            android:layout_height="80px"
+            android:id="@+id/calendar_tab_01ImageButton"
+            android:background="@drawable/calendar_tab_01"
+            android:layout_alignBottom="@+id/calendar_tab_02ImageButton"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40px" />
+
+        <ImageButton
+            android:layout_width="77px"
+            android:layout_height="80px"
+            android:id="@+id/calendar_tab_00ImageButton"
+            android:background="@drawable/calendar_tab_00"
+            android:layout_alignBottom="@+id/calendar_tab_01ImageButton"
+            android:layout_toStartOf="@+id/calendar_tab_01ImageButton" />
+
+        <com.alamkanak.weekview.WeekView
+            android:id="@+id/weekView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:eventTextColor="@android:color/white"
+            app:textSize="12sp"
+            app:hourHeight="60dp"
+            app:headerColumnPadding="8dp"
+            app:headerColumnTextColor="@color/toolbar_text"
+            app:headerRowPadding="12dp"
+            app:columnGap="8dp"
+            app:noOfVisibleDays="3"
+            app:headerRowBackgroundColor="@color/toolbar"
+            app:dayBackgroundColor="#05000000"
+            app:todayBackgroundColor="#1848adff"
+            app:headerColumnBackground="#ffffffff"
+            app:todayHeaderTextColor="@color/accent"
+            android:layout_below="@+id/todayTextView"
+            android:layout_alignParentStart="true"
+            android:visibility="invisible"
+            />
+
+        <GridView
+            android:id="@+id/headerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="7"
+            android:layout_below="@+id/todayTextView"
+            android:layout_alignParentStart="true">
+        </GridView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="4px"
+            android:id="@+id/monthHeaderView"
+            android:background="#e8e8e8"
+            android:layout_below="@+id/headerView"
+            />
+
+        <GridView
+            android:id="@+id/monthView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="7"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="2dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            android:background="#e8e8e8"
+            android:listSelector="@drawable/grid_view_item_selector_xml"
+            android:layout_below="@id/monthHeaderView"
+            >
+        </GridView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="4px"
+            android:id="@+id/monthFooterView"
+            android:background="#e8e8e8"
+            android:layout_below="@+id/monthView"
+            />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/monthListView"
+            android:layout_below="@+id/monthFooterView"
+            android:layout_alignParentStart="true"
+            android:background="#e8e8e8"
+            android:listSelector="@drawable/grid_view_item_selector_xml"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

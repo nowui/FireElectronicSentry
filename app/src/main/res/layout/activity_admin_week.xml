@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:title="@string/app_name"
+        android:background="@color/title_background_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/weatherTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/surfaceView"
+        android:gravity="center|center_vertical|center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="本周计划列表"
+        android:id="@+id/titleTextView"
+        android:textColor="@color/text_color"
+        android:layout_below="@+id/toolbar"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/lineTextView"
+        android:textColor="@color/text_color"
+        android:background="#e8e8e8"
+        android:layout_below="@+id/titleTextView"
+        />
+
+    <GridView
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="8"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="2dp"
+        android:background="#e8e8e8"
+        android:layout_below="@+id/lineTextView"
+        >
+    </GridView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/line2TextView"
+        android:textColor="@color/text_color"
+        android:background="#e8e8e8"
+        android:layout_below="@+id/headerView"
+        />
+
+    <GridView
+        android:id="@+id/mainView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="8"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="2dp"
+        android:background="#e8e8e8"
+        android:layout_below="@+id/line2TextView"
+        >
+    </GridView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/line3TextView"
+        android:textColor="@color/text_color"
+        android:background="#e8e8e8"
+        android:layout_below="@+id/mainView"
+        />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_below="@+id/line3TextView"
+        android:background="#e8e8e8"
+        android:listSelector="@drawable/grid_view_item_selector_xml"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:title="@string/app_name"
+        android:background="@color/title_background_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="120px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/weatherTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20px"
+        android:layout_above="@+id/surfaceView"
+        android:gravity="center|center_vertical|center_horizontal"
+        android:visibility="invisible"
+        />
+
+    <ImageButton
+        android:layout_width="60px"
+        android:layout_height="60px"
+        android:id="@+id/imageButton"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25px"
+        android:layout_above="@+id/surfaceView"
+        android:background="@drawable/setting" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="#e8e8e8"
+        >
+
+        <TextView
+            android:layout_width="150px"
+            android:layout_height="390px"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/noticeBGTextView"
+            android:textColor="@color/text_color"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:background="#ffffff"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="390px"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/noticeTextView"
+            android:text="通知公告"
+            android:ems="1"
+            android:textColor="@color/text_color"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50px"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="4px"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/noticeLineTextView"
+            android:textColor="@color/text_color"
+            android:background="#e8e8e8"
+            android:layout_below="@+id/noticeBGTextView"
+            />
+
+        <TextView
+            android:layout_width="4px"
+            android:layout_height="390px"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/noticeLine2TextView"
+            android:textColor="@color/text_color"
+            android:background="#e8e8e8"
+            android:layout_toEndOf="@+id/noticeBGTextView"
+            />
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="390px"
+            android:id="@+id/pullRefreshListView"
+            android:background="#e8e8e8"
+            ptr:ptrHeaderTextColor="#999999"
+            ptr:ptrHeaderBackground="#eeeeee"
+            ptr:ptrAnimationStyle="flip"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/noticeLine2TextView" />
+
+        <GridView
+            android:id="@+id/applyView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="3"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="2dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            android:background="#e8e8e8"
+            android:listSelector="@drawable/grid_view_item_selector_xml"
+            android:layout_below="@+id/noticeLineTextView"
+            >
+        </GridView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
