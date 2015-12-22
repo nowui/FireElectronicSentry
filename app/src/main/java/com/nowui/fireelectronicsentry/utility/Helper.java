@@ -9,6 +9,7 @@ import android.hardware.Camera;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.util.Log;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -87,7 +88,7 @@ public class Helper {
     public static final int CodeRequest1 = 1;
     public static final int CodeResult = 10;
 
-    private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
@@ -388,6 +389,22 @@ public class Helper {
             }
         }
         return result;
+    }
+
+    public static void show(String str) {
+        int maxLogSize = 1000;
+
+        for(int i = 0; i <= str.length() / maxLogSize; i++) {
+
+            int start = i * maxLogSize;
+
+            int end = (i+1) * maxLogSize;
+
+            end = end > str.length() ? str.length() : end;
+
+            Log.v("aaa", str.substring(start, end));
+
+        }
     }
 
 }

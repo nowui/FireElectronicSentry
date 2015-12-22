@@ -271,7 +271,9 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
         client.post(CalendarActivity.this, url, stringEntity, "application/json", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                System.out.println(new String(responseBody));
+                //System.out.println(new String(responseBody));
+                Helper.show(new String(responseBody));
+
 
                 Map<String, Object> jsonMap = JSON.parseObject(new String(responseBody), new TypeReference<Map<String, Object>>() {
                 });
@@ -327,6 +329,8 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                     }
 
                 }
+
+                System.out.println(dayTaskList.size() + "===========");
 
                 int temp = 28;
 
@@ -614,7 +618,13 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
             }
         }
 
-        //System.out.println(dayTaskList.size() + "++++++++");
+        /*System.out.println(dayTaskList.size() + "++++++++");
+
+        for(Task task : dayTaskList) {
+            if (task.getTaskstart().equals("2015-12-22 00:00:00")) {
+                System.out.println(task.getTaskstart() + "--" + task.getTaskend() + "--" + task.getTaskid() + "--" + task.getSubDeptID() + "--" + task.getSubDeptName());
+            }
+        }*/
 
         for(Task task : dayTaskList) {
             int nowDay = Helper.getDay();
@@ -643,6 +653,7 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                     endTime.set(Calendar.HOUR_OF_DAY, taskEndTime.get(Calendar.HOUR_OF_DAY));
                     endTime.set(Calendar.MINUTE, taskEndTime.get(Calendar.MINUTE));
                     endTime.set(Calendar.MONTH, newMonth);
+                    endTime.add(Calendar.SECOND, -1);
                     //endTime.setTime(Helper.formatDate(task.getTaskend()));
                     WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
                     event.setName(task.getSubDeptName());
