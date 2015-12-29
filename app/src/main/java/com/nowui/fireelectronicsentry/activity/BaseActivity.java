@@ -13,6 +13,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,6 +56,15 @@ public class BaseActivity extends AppCompatActivity implements OnRefreshListener
     private Boolean isLocal;
     private MaterialDialog materialDialog;
     Map<String, Object> initMap;
+
+    @Override
+    protected void onResume() {
+        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

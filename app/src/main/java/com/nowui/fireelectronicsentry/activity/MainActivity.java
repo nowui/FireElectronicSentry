@@ -142,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         setContentView(R.layout.activity_main);
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 
+        System.out.println(Helper.getScreenWidth(this));
+        System.out.println(Helper.getScreenHeight(this));
+
         SharedPreferences setting = getSharedPreferences(Helper.KeyAppSetting, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = setting.edit();
 
@@ -377,25 +380,31 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
-        SurfaceHolder holder = surfaceView.getHolder();
-        holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        holder.setKeepScreenOn(true);
-        holder.addCallback(this);
+        if(Helper.checkCameraFacing(1)) {
+            SurfaceHolder holder = surfaceView.getHolder();
+            holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+            holder.setKeepScreenOn(true);
+            holder.addCallback(this);
+        }
 
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    if (user == null) {
-                        Toast.makeText(getApplicationContext(), R.string.toast_employee, Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (camera != null) {
-                            camera.takePicture(null, null, new MyPictureCallback());
+                if(Helper.checkCameraFacing(1)) {
+                    try {
+                        if (user == null) {
+                            Toast.makeText(getApplicationContext(), R.string.toast_employee, Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (camera != null) {
+                                camera.takePicture(null, null, new MyPictureCallback());
+                            }
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } else {
+                    chekLogin();
                 }
             }
         });
@@ -889,74 +898,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 SurfaceHolder holder = surfaceView.getHolder();
                 holder.removeCallback(MainActivity.this);
 
-                SharedPreferences setting = getSharedPreferences(Helper.KeyAppSetting, Activity.MODE_PRIVATE);
-                String userId = setting.getString(Helper.KeyUserId, "");
-                String userName = setting.getString(Helper.KeyUserName, "");
-
-                attendance = new Attendance();
-
-                attendance.setUserID(Integer.valueOf(userId));
-                attendance.setUserName(userName);
-                //attendance.setUserPictureBase64(Helper.encodeBase64(data));
-                attendance.setUserPictureBase64(Helper.encodeBase64ForFile(Environment.getExternalStorageDirectory() + "/FireElectronicSentry/userPictureBase64.jpg"));
-                attendance.setLoginOrAttendance(0);
-                attendance.setLoginOrAttendanceStatus(0);
-
-                showLoadingDialog();
-
-                //AttendanceDao.insert(dbHelper, attendance);
-
-                AttendanceDao.post(MainActivity.this, client, attendance, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        System.out.println(new String(responseBody));
-
-                        Map<String, Object> jsonMap = JSON.parseObject(new String(responseBody), new TypeReference<Map<String, Object>>() {});
-
-                        if (Integer.valueOf(jsonMap.get("result").toString()) == 1) {
-                            //上传本地数据
-                            //handler.post(task);
-
-                            if (Helper.isAdmin) {
-                                camera.release();
-
-                                Intent intent = new Intent();
-                                intent.setClass(MainActivity.this, AdminActivity.class);
-                                startActivityForResult(intent, Helper.CodeRequest);
-
-                                finish();
-                            } else {
-                                loginSuccess();
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), jsonMap.get("message").toString(), Toast.LENGTH_SHORT).show();
-
-                            camera.startPreview();
-                        }
-
-                        materialDialog.hide();
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        AttendanceDao.insert(dbHelper, attendance);
-
-
-                        if (Helper.isAdmin) {
-                            camera.release();
-
-                            Intent intent = new Intent();
-                            intent.setClass(MainActivity.this, AdminActivity.class);
-                            startActivityForResult(intent, Helper.CodeRequest);
-
-                            finish();
-                        } else {
-                            loginSuccess();
-                        }
-
-                        materialDialog.hide();
-                    }
-                });
+                chekLogin();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -964,8 +906,81 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
     }
 
+    private void chekLogin() {
+        SharedPreferences setting = getSharedPreferences(Helper.KeyAppSetting, Activity.MODE_PRIVATE);
+        String userId = setting.getString(Helper.KeyUserId, "");
+        String userName = setting.getString(Helper.KeyUserName, "");
+
+        attendance = new Attendance();
+
+        attendance.setUserID(Integer.valueOf(userId));
+        attendance.setUserName(userName);
+        //attendance.setUserPictureBase64(Helper.encodeBase64(data));
+        attendance.setUserPictureBase64(Helper.encodeBase64ForFile(Environment.getExternalStorageDirectory() + "/FireElectronicSentry/userPictureBase64.jpg"));
+        attendance.setLoginOrAttendance(0);
+        attendance.setLoginOrAttendanceStatus(0);
+
+        showLoadingDialog();
+
+        //AttendanceDao.insert(dbHelper, attendance);
+
+        AttendanceDao.post(MainActivity.this, client, attendance, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                System.out.println(new String(responseBody));
+
+                Map<String, Object> jsonMap = JSON.parseObject(new String(responseBody), new TypeReference<Map<String, Object>>() {});
+
+                if (Integer.valueOf(jsonMap.get("result").toString()) == 1) {
+                    //上传本地数据
+                    //handler.post(task);
+
+                    if (Helper.isAdmin) {
+                        camera.release();
+
+                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this, AdminActivity.class);
+                        startActivityForResult(intent, Helper.CodeRequest);
+
+                        finish();
+                    } else {
+                        loginSuccess();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), jsonMap.get("message").toString(), Toast.LENGTH_SHORT).show();
+
+                    camera.startPreview();
+                }
+
+                materialDialog.hide();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                AttendanceDao.insert(dbHelper, attendance);
+
+
+                if (Helper.isAdmin) {
+                    camera.release();
+
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, AdminActivity.class);
+                    startActivityForResult(intent, Helper.CodeRequest);
+
+                    finish();
+                } else {
+                    loginSuccess();
+                }
+
+                materialDialog.hide();
+            }
+        });
+    }
+
     private void loginSuccess() {
-        camera.release();
+        if (Helper.checkCameraFacing(1)) {
+            camera.release();
+        }
 
         //setting.getString(Helper.KeyDepartmentName, "")
 

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -245,6 +246,10 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, mFilters, mTechLists);
 

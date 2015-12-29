@@ -2,6 +2,7 @@ package com.nowui.fireelectronicsentry.activity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -40,6 +41,15 @@ public class NoticeDetailActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button playButton;
     MediaPlayer player;
+
+    @Override
+    protected void onResume() {
+        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

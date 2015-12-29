@@ -3,6 +3,7 @@ package com.nowui.fireelectronicsentry.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -29,6 +30,15 @@ import java.util.Map;
 public class ApplyActivity extends AppCompatActivity {
 
     private GridView applyView;
+
+    @Override
+    protected void onResume() {
+        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

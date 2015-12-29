@@ -95,6 +95,7 @@ public class UpdateManager {
 				HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
 				// 读取服务端version.xml的内容(流)
 				info = XMLParserUtil.getUpdateInfo(urlConn.getInputStream());
+				urlConn.getInputStream().close();
 				urlConn.disconnect();
 			} catch (IOException e) {
 				e.printStackTrace();

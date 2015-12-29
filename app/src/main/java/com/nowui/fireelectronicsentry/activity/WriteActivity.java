@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.nfc.NdefMessage;
@@ -107,6 +108,12 @@ public class WriteActivity extends AppCompatActivity {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
+
+
+        if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         nfcAdapter.enableForegroundDispatch(this, pendingIntent,
                 mWriteTagFilters, mTechLists);
     }
