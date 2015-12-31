@@ -151,13 +151,13 @@ public class ApplyActivity extends AppCompatActivity {
                     intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireYearMaintainReport.aspx?SubMenuID=40917&deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
                     intent.setClass(ApplyActivity.this, CarActivity.class);
                 } else if (position == 1) {
-                    intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireMonthRecordReport.aspx?SubMenuID=40918&deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
+                    intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireMonthRecordReportNewPhone.aspx?SubMenuID=40918&deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
                     intent.setClass(ApplyActivity.this, CarActivity.class);
                 } else if (position == 2) {
                     intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireInspectionRecordReport.aspx?SubMenuID=40916&deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
                     intent.setClass(ApplyActivity.this, CarActivity.class);
                 } else if (position == 3) {
-                    intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireControlRoomRecordReport.aspx?SubMenuID=40919&deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
+                    intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireControlRoomRecordReportNewPhone.aspx?SubMenuID=40919&deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
                     intent.setClass(ApplyActivity.this, CarActivity.class);
                 /*} else if (position == 4) {
                     intent.putExtra("url", "http://218.242.145.23:85/FrameSet/Login.aspx");

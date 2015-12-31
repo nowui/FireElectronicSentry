@@ -8,8 +8,10 @@ import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+import android.view.WindowManager;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -34,7 +36,7 @@ import java.util.Map;
 public class Helper {
 
     public static final String WebUrl = "http://oa.herigbit.cn/OAFramework";
-    //public static final String WebUrl = "http://leon.ngrok.cc/OA";
+    //public static final String WebUrl = "http://leon.ngrok.cc/OAFramework";
 
     public static final String AdminWebUrl = "http://www.herigbit.com/FSM";
 
@@ -134,6 +136,16 @@ public class Helper {
         }
 
         return new Date();
+    }
+
+    public static int getScreenWidth(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        return wm.getDefaultDisplay().getWidth();
+    }
+
+    public static int getScreenHeight(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        return wm.getDefaultDisplay().getHeight();
     }
 
     public static String getMonthFirstDay() {
@@ -405,6 +417,21 @@ public class Helper {
             Log.v("aaa", str.substring(start, end));
 
         }
+    }
+
+    public static boolean checkCameraFacing(final int facing) {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+            return false;
+        }
+        final int cameraCount = Camera.getNumberOfCameras();
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        for (int i = 0; i < cameraCount; i++) {
+            Camera.getCameraInfo(i, info);
+            if (facing == info.facing) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
