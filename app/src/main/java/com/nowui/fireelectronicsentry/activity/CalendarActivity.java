@@ -621,7 +621,12 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                     event.setId(Long.valueOf(task.getTaskid()));
                     event.setColor(getResources().getColor(R.color.month_remind_color));
 
-                    if (newMonth == taskStartTime.get(Calendar.MONTH)) {
+                    int tempMonth = taskStartTime.get(Calendar.MONTH);
+                    if(tempMonth == 0) {
+                        tempMonth = 12;
+                    }
+
+                    if (newMonth == tempMonth) {
                         events.add(event);
                     }
                 }
@@ -670,8 +675,18 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                     event.setId(Long.valueOf(task.getSubDeptID()));
                     //event.setColor(getResources().getColor(R.color.month_remind_color));
 
+                    int tempMonth = taskStartTime.get(Calendar.MONTH);
+                    if(tempMonth == 0) {
+                        tempMonth = 12;
+                    }
 
-                    if (newMonth == taskStartTime.get(Calendar.MONTH)) {
+                    if (newMonth == tempMonth) {
+
+                        /*System.out.println("startDay:" + startDay);
+                        System.out.println("nowDay:" + nowDay);
+                        System.out.println("endDay:" + endDay);
+                        System.out.println("i:" + i);
+                        System.out.println("----------------------------------:");*/
 
 
                         Calendar nowTime = Calendar.getInstance();
