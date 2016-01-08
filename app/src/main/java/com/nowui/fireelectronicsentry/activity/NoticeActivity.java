@@ -115,13 +115,20 @@ public class NoticeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Notice notice = warningList.get(position - 1);
 
+                notice.setMessageHasReaded("1");
+
+                warningAdapter.notifyDataSetChanged();
+
                 /*Intent intent = new Intent();
                 intent.putExtra("messageid", map.get("id").toString());
                 intent.setClass(NoticeActivity.this, NoticeDetailActivity.class);
                 startActivityForResult(intent, Helper.CodeRequest);*/
 
+                SharedPreferences setting = getSharedPreferences(Helper.KeyAppSetting, Activity.MODE_PRIVATE);
+                String userId = setting.getString(Helper.KeyUserId, "");
+
                 Intent intent = new Intent();
-                intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Notifiaction/NotificationDetail.aspx?messageID=" + notice.getMessageid());
+                intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Notifiaction/NotificationDetail.aspx?messageID=" + notice.getMessageid() + "&userID=" + userId);
                 intent.setClass(NoticeActivity.this, CarActivity.class);
                 startActivityForResult(intent, Helper.CodeRequest);
             }
@@ -161,6 +168,10 @@ public class NoticeActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Notice notice = noticeList.get(position - 1);
+
+                notice.setMessageHasReaded("1");
+
+                noticeAdapter.notifyDataSetChanged();
 
                 SharedPreferences setting = getSharedPreferences(Helper.KeyAppSetting, Activity.MODE_PRIVATE);
                 String userId = setting.getString(Helper.KeyUserId, "");
@@ -450,6 +461,8 @@ public class NoticeActivity extends AppCompatActivity {
 
             if (! notice.getMessageHasReaded().equals("1")) {
                 holder.messageHasReadedTextView.setVisibility(View.VISIBLE);
+            } else {
+                holder.messageHasReadedTextView.setVisibility(View.INVISIBLE);
             }
 
 

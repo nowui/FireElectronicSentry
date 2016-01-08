@@ -516,6 +516,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }*/
 
         //checkTodayUnfinishedTaskCount();
+
+        //loginSuccess();
     }
 
     private void logout() {
@@ -793,7 +795,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     //}
                 }
 
-                materialDialog.hide();
+                if (materialDialog != null) {
+                    materialDialog.hide();
+                }
             }
 
             @Override
@@ -979,7 +983,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     private void loginSuccess() {
         if (Helper.checkCameraFacing(1)) {
-            camera.release();
+            if(camera != null) {
+                camera.release();
+            }
         }
 
         //setting.getString(Helper.KeyDepartmentName, "")
@@ -1425,9 +1431,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                                         deleteEmergency();
 
-                                        dialog.dismiss();
+                                    } else {
 
                                     }
+
+                                    dialog.dismiss();
 
                                     materialDialog.hide();
                                 }

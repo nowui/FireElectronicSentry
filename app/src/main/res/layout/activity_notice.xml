@@ -79,6 +79,8 @@
                 ptr:ptrHeaderBackground="#eeeeee"
                 ptr:ptrAnimationStyle="flip"
                 android:layout_alignParentTop="true"
+                android:divider="#eeeeee"
+                android:dividerHeight="1dp"
                 android:layout_toEndOf="@+id/noticeLineTextView" />
 
             <TextView
@@ -143,6 +145,8 @@
                 ptr:ptrHeaderBackground="#eeeeee"
                 ptr:ptrAnimationStyle="flip"
                 android:layout_alignParentTop="true"
+                android:divider="#eeeeee"
+                android:dividerHeight="1dp"
                 android:layout_toEndOf="@+id/noticeLine3TextView" />
         </RelativeLayout>
 
