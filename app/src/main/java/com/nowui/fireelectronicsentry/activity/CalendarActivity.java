@@ -21,6 +21,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -206,7 +207,7 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
 
 
                 if (usetType.equals("1")) {
-                    departmentId  = setting.getString(Helper.KeyChoiceDepartmentId, "");
+                    departmentId = setting.getString(Helper.KeyChoiceDepartmentId, "");
                 }
 
                 if (usetType.equals("1") || usetType.equals("2")) {
@@ -461,8 +462,8 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
         calendar_tab_01ImageButton.setBackground(getResources().getDrawable(R.drawable.calendar_tab_01));
         calendar_tab_02ImageButton.setBackground(getResources().getDrawable(R.drawable.calendar_tab_02));
 
-        //calendar_tab_00ImageButton.setVisibility(View.INVISIBLE);
-        //calendar_tab_01ImageButton.setVisibility(View.INVISIBLE);
+        calendar_tab_00ImageButton.setVisibility(View.VISIBLE);
+        calendar_tab_01ImageButton.setVisibility(View.VISIBLE);
         calendar_tab_02ImageButton.setVisibility(View.INVISIBLE);
 
         headerView.setVisibility(View.VISIBLE);
@@ -879,6 +880,7 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
 
     private class GridViewCellAdapter extends BaseAdapter {
 
+        private Context context;
         private LayoutInflater inflater;
         public int selectIndex = -1;
         public int start;
@@ -887,6 +889,7 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
         public GridViewCellAdapter(Context context, int start) {
             this.inflater = LayoutInflater.from(context);
             this.start = start;
+            this.context = context;
 
             Calendar calendar = Calendar.getInstance();
             this.selectIndex = calendar.get(Calendar.DATE) + this.start;
@@ -929,6 +932,13 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
 
                 holder = new MonthViewHolder();
                 holder.dayTextView = (TextView) convertView.findViewById(R.id.dayTextView);
+
+                if (Helper.getScreenWidth(this.context) < 720) {
+                    RelativeLayout.LayoutParams dayTextViewLayoutParams = (RelativeLayout.LayoutParams) holder.dayTextView.getLayoutParams();
+                    dayTextViewLayoutParams.height = Helper.formatPix(this.context, 100);
+                    holder.dayTextView.setLayoutParams(dayTextViewLayoutParams);
+                }
+
                 holder.messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
                 convertView.setTag(holder);
             } else {

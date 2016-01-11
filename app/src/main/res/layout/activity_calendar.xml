@@ -47,7 +47,9 @@
             android:background="@drawable/calendar_tab_02"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="40px" />
+            android:layout_marginRight="40px"
+            android:visibility="invisible"
+            />
 
         <ImageButton
             android:layout_width="74px"
@@ -56,7 +58,9 @@
             android:background="@drawable/calendar_tab_01"
             android:layout_alignBottom="@+id/calendar_tab_02ImageButton"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="40px" />
+            android:layout_marginRight="40px"
+            android:visibility="invisible"
+            />
 
         <ImageButton
             android:layout_width="77px"
@@ -64,7 +68,9 @@
             android:id="@+id/calendar_tab_00ImageButton"
             android:background="@drawable/calendar_tab_00"
             android:layout_alignBottom="@+id/calendar_tab_01ImageButton"
-            android:layout_toStartOf="@+id/calendar_tab_01ImageButton" />
+            android:layout_toStartOf="@+id/calendar_tab_01ImageButton"
+            android:visibility="invisible"
+            />
 
         <com.alamkanak.weekview.WeekView
             android:id="@+id/weekView"

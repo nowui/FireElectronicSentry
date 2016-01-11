@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -28,8 +27,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -183,6 +181,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         menuBackgroundImageView = (ImageView) findViewById(R.id.menuBackgroundImageView);
 
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menuBackgroundImageViewLayoutParams = (RelativeLayout.LayoutParams) menuBackgroundImageView.getLayoutParams();
+            menuBackgroundImageViewLayoutParams.topMargin = Helper.formatPix(this, 250);
+            menuBackgroundImageViewLayoutParams.width = Helper.formatPix(this, 400);
+            menuBackgroundImageViewLayoutParams.height = Helper.formatPix(this, 400);
+            menuBackgroundImageView.setLayoutParams(menuBackgroundImageViewLayoutParams);
+        }
+
         employeeButton = (ImageButton) findViewById(R.id.employeeButton);
 
         reloadButton = (Button) findViewById(R.id.reloadButton);
@@ -199,8 +205,31 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         });
 
         menu00TextView = (TextView) findViewById(R.id.menu00TextView);
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu00TextViewLayoutParams = (RelativeLayout.LayoutParams) menu00TextView.getLayoutParams();
+            menu00TextViewLayoutParams.leftMargin = Helper.formatPix(this, 550);
+            menu00TextViewLayoutParams.topMargin = Helper.formatPix(this, 180);
+            menu00TextView.setLayoutParams(menu00TextViewLayoutParams);
+        }
+
         menu02TextView = (TextView) findViewById(R.id.menu02TextView);
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu02TextViewLayoutParams = (RelativeLayout.LayoutParams) menu02TextView.getLayoutParams();
+            menu02TextViewLayoutParams.leftMargin = Helper.formatPix(this, 680);
+            menu02TextViewLayoutParams.topMargin = Helper.formatPix(this, 370);
+            menu02TextView.setLayoutParams(menu02TextViewLayoutParams);
+        }
+
         menu03TextView = (TextView) findViewById(R.id.menu03TextView);
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu03TextViewLayoutParams = (RelativeLayout.LayoutParams) menu03TextView.getLayoutParams();
+            menu03TextViewLayoutParams.leftMargin = Helper.formatPix(this, 180);
+            menu03TextViewLayoutParams.topMargin = Helper.formatPix(this, 269);
+            menu03TextView.setLayoutParams(menu03TextViewLayoutParams);
+        }
 
         menu00ImageButton = (ImageButton) findViewById(R.id.menu00ImageButton);
         menu00ImageButton.setOnClickListener(new View.OnClickListener() {
@@ -213,6 +242,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu00ImageButtonLayoutParams = (RelativeLayout.LayoutParams) menu00ImageButton.getLayoutParams();
+            menu00ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 394);
+            menu00ImageButtonLayoutParams.topMargin = Helper.formatPix(this, 153);
+            menu00ImageButtonLayoutParams.width = Helper.formatPix(this, 177);
+            menu00ImageButtonLayoutParams.height = Helper.formatPix(this, 150);
+            menu00ImageButton.setLayoutParams(menu00ImageButtonLayoutParams);
+        }
+
         menu01ImageButton = (ImageButton) findViewById(R.id.menu01ImageButton);
         menu01ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,6 +261,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu01ImageButtonLayoutParams = (RelativeLayout.LayoutParams) menu01ImageButton.getLayoutParams();
+            menu01ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 24);
+            menu01ImageButtonLayoutParams.topMargin = Helper.formatPix(this, 500);
+            menu01ImageButtonLayoutParams.width = Helper.formatPix(this, 177);
+            menu01ImageButtonLayoutParams.height = Helper.formatPix(this, 150);
+            menu01ImageButton.setLayoutParams(menu01ImageButtonLayoutParams);
+        }
+
         menu02ImageButton = (ImageButton) findViewById(R.id.menu02ImageButton);
         menu02ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,6 +279,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 startActivityForResult(intent, Helper.CodeRequest);
             }
         });
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu02ImageButtonLayoutParams = (RelativeLayout.LayoutParams) menu02ImageButton.getLayoutParams();
+            menu02ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 540);
+            menu02ImageButtonLayoutParams.topMargin = Helper.formatPix(this, 348);
+            menu02ImageButtonLayoutParams.width = Helper.formatPix(this, 177);
+            menu02ImageButtonLayoutParams.height = Helper.formatPix(this, 150);
+            menu02ImageButton.setLayoutParams(menu02ImageButtonLayoutParams);
+        }
 
         menu03ImageButton = (ImageButton) findViewById(R.id.menu03ImageButton);
         menu03ImageButton.setOnClickListener(new View.OnClickListener() {
@@ -244,6 +300,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu03ImageButtonLayoutParams = (RelativeLayout.LayoutParams) menu03ImageButton.getLayoutParams();
+            menu03ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 32);
+            menu03ImageButtonLayoutParams.topMargin = Helper.formatPix(this, 243);
+            menu03ImageButtonLayoutParams.width = Helper.formatPix(this, 177);
+            menu03ImageButtonLayoutParams.height = Helper.formatPix(this, 150);
+            menu03ImageButton.setLayoutParams(menu03ImageButtonLayoutParams);
+        }
+
         menu04ImageButton = (ImageButton) findViewById(R.id.menu04ImageButton);
         menu04ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,6 +318,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 startActivity(intent);
             }
         });
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu04ImageButtonLayoutParams = (RelativeLayout.LayoutParams) menu04ImageButton.getLayoutParams();
+            menu04ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 270);
+            menu04ImageButtonLayoutParams.topMargin = Helper.formatPix(this, 666);
+            menu04ImageButtonLayoutParams.width = Helper.formatPix(this, 177);
+            menu04ImageButtonLayoutParams.height = Helper.formatPix(this, 150);
+            menu04ImageButton.setLayoutParams(menu04ImageButtonLayoutParams);
+        }
 
         menu05ImageButton = (ImageButton) findViewById(R.id.menu05ImageButton);
         menu05ImageButton.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +339,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams menu05ImageButtonLayoutParams = (RelativeLayout.LayoutParams) menu05ImageButton.getLayoutParams();
+            menu05ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 524);
+            menu05ImageButtonLayoutParams.topMargin = Helper.formatPix(this, 500);
+            menu05ImageButtonLayoutParams.width = Helper.formatPix(this, 177);
+            menu05ImageButtonLayoutParams.height = Helper.formatPix(this, 150);
+            menu05ImageButton.setLayoutParams(menu05ImageButtonLayoutParams);
+        }
+
         tab00ImageButton = (ImageButton) findViewById(R.id.tab00ImageButton);
         tab00ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,6 +357,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 startActivityForResult(intent, Helper.CodeRequest);
             }
         });
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams tab00ImageButtonLayoutParams = (RelativeLayout.LayoutParams) tab00ImageButton.getLayoutParams();
+            tab00ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 50);
+            tab00ImageButtonLayoutParams.bottomMargin = Helper.formatPix(this, 100);
+            tab00ImageButtonLayoutParams.width = Helper.formatPix(this, 90);
+            tab00ImageButtonLayoutParams.height = Helper.formatPix(this, 132);
+            tab00ImageButton.setLayoutParams(tab00ImageButtonLayoutParams);
+        }
 
         tab01ImageButton = (ImageButton) findViewById(R.id.tab01ImageButton);
         tab01ImageButton.setOnClickListener(new View.OnClickListener() {
@@ -285,6 +377,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 startActivityForResult(intent, Helper.CodeRequest);
             }
         });
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams tab01ImageButtonLayoutParams = (RelativeLayout.LayoutParams) tab01ImageButton.getLayoutParams();
+            tab01ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 175);
+            tab01ImageButtonLayoutParams.bottomMargin = Helper.formatPix(this, 100);
+            tab01ImageButtonLayoutParams.width = Helper.formatPix(this, 90);
+            tab01ImageButtonLayoutParams.height = Helper.formatPix(this, 132);
+            tab01ImageButton.setLayoutParams(tab01ImageButtonLayoutParams);
+        }
 
         tab02ImageButton = (ImageButton) findViewById(R.id.tab02ImageButton);
         tab02ImageButton.setOnClickListener(new View.OnClickListener() {
@@ -315,6 +416,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams tab02ImageButtonLayoutParams = (RelativeLayout.LayoutParams) tab02ImageButton.getLayoutParams();
+            tab02ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 303);
+            tab02ImageButtonLayoutParams.bottomMargin = Helper.formatPix(this, 100);
+            tab02ImageButtonLayoutParams.width = Helper.formatPix(this, 112);
+            tab02ImageButtonLayoutParams.height = Helper.formatPix(this, 141);
+            tab02ImageButton.setLayoutParams(tab02ImageButtonLayoutParams);
+        }
+
         tab03ImageButton = (ImageButton) findViewById(R.id.tab03ImageButton);
         tab03ImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -334,6 +444,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         .show();
             }
         });
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams tab03ImageButtonLayoutParams = (RelativeLayout.LayoutParams) tab03ImageButton.getLayoutParams();
+            tab03ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 454);
+            tab03ImageButtonLayoutParams.bottomMargin = Helper.formatPix(this, 100);
+            tab03ImageButtonLayoutParams.width = Helper.formatPix(this, 90);
+            tab03ImageButtonLayoutParams.height = Helper.formatPix(this, 132);
+            tab03ImageButton.setLayoutParams(tab03ImageButtonLayoutParams);
+        }
 
         tab04ImageButton = (ImageButton) findViewById(R.id.tab04ImageButton);
         tab04ImageButton.setOnClickListener(new View.OnClickListener() {
@@ -372,6 +491,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams tab04ImageButtonLayoutParams = (RelativeLayout.LayoutParams) tab04ImageButton.getLayoutParams();
+            tab04ImageButtonLayoutParams.leftMargin = Helper.formatPix(this, 580);
+            tab04ImageButtonLayoutParams.bottomMargin = Helper.formatPix(this, 100);
+            tab04ImageButtonLayoutParams.width = Helper.formatPix(this, 90);
+            tab04ImageButtonLayoutParams.height = Helper.formatPix(this, 132);
+            tab04ImageButton.setLayoutParams(tab04ImageButtonLayoutParams);
+        }
+
         emergencyImageButton = (ImageButton) findViewById(R.id.emergencyImageButton);
         emergencyImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -408,6 +536,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 }
             }
         });
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams loginButtonLayoutParams = (RelativeLayout.LayoutParams) loginButton.getLayoutParams();
+            loginButtonLayoutParams.width = Helper.formatPix(this, 430);
+            loginButtonLayoutParams.height = Helper.formatPix(this, 120);
+            loginButton.setLayoutParams(loginButtonLayoutParams);
+        }
 
 
         String choiceDepartmentName = setting.getString(Helper.KeyChoiceDepartmentName, "");
@@ -517,7 +652,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         //checkTodayUnfinishedTaskCount();
 
-        //loginSuccess();
+        loginSuccess();
     }
 
     private void logout() {

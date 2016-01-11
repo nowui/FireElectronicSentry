@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -99,6 +100,13 @@ public class MapActivity extends AppCompatActivity {
         weatherTextView.setText(weather);
 
         mMapView = (MapView) findViewById(R.id.bmapView);
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams mMapViewLayoutParams = (RelativeLayout.LayoutParams) mMapView.getLayoutParams();
+            mMapViewLayoutParams.height = Helper.formatPix(this, 700);
+            mMapView.setLayoutParams(mMapViewLayoutParams);
+        }
+
         mBaiduMap = mMapView.getMap();
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);

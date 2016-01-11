@@ -138,6 +138,12 @@ public class Helper {
         return new Date();
     }
 
+    public static int formatPix(Context context, float pixValue) {
+        int width = 720;
+
+        return (int) Math.round(getScreenWidth(context) * 1.0 / width * pixValue);
+    }
+
     public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         return wm.getDefaultDisplay().getWidth();
