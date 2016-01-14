@@ -109,6 +109,13 @@ public class CameraListActivity extends AppCompatActivity implements SurfaceHold
             }
         });
 
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams loginButtonLayoutParams = (RelativeLayout.LayoutParams) loginButton.getLayoutParams();
+            loginButtonLayoutParams.width = Helper.formatPix(this, 360);
+            loginButtonLayoutParams.height = Helper.formatPix(this, 120);
+            loginButton.setLayoutParams(loginButtonLayoutParams);
+        }
+
         backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +134,13 @@ public class CameraListActivity extends AppCompatActivity implements SurfaceHold
                 finish();
             }
         });
+
+        if (Helper.getScreenWidth(this) < 720) {
+            RelativeLayout.LayoutParams backButtonLayoutParams = (RelativeLayout.LayoutParams) backButton.getLayoutParams();
+            backButtonLayoutParams.width = Helper.formatPix(this, 360);
+            backButtonLayoutParams.height = Helper.formatPix(this, 120);
+            backButton.setLayoutParams(backButtonLayoutParams);
+        }
 
         pictureRelativeLayout = (RelativeLayout) findViewById(R.id.pictureRelativeLayout);
     }

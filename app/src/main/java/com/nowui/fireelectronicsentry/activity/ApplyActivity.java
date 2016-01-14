@@ -127,7 +127,17 @@ public class ApplyActivity extends AppCompatActivity {
 
         map = new HashMap<String, Object>();
         map.put("image", R.drawable.apply_menu_09);
-        map.put("text", "消防检测项其他");
+        map.put("text", "日检其他项防火巡查记录");
+        applyList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("image", R.drawable.apply_menu_10);
+        map.put("text", "日检其他项防火巡查记录（周月）");
+        applyList.add(map);
+
+        map = new HashMap<String, Object>();
+        map.put("image", R.drawable.apply_menu_11);
+        map.put("text", "防火巡查记录（周月）");
         applyList.add(map);
 
         applyView = (GridView) findViewById(R.id.applyView);
@@ -179,6 +189,12 @@ public class ApplyActivity extends AppCompatActivity {
                     intent.setClass(ApplyActivity.this, CarActivity.class);
                 } else if (position == 8) {
                     intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireInspectionRecordOtherReport.aspx?deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
+                    intent.setClass(ApplyActivity.this, CarActivity.class);
+                } else if (position == 9) {
+                    intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireInspectionRecordOtherReportWeekMonth.aspx?deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
+                    intent.setClass(ApplyActivity.this, CarActivity.class);
+                } else if (position == 10) {
+                    intent.putExtra("url", Helper.WebUrl + "/Herigbit/WebSite/Report/FireInspectionRecordReportWeekMonth.aspx?deptID=" + departmentId + "&userID=" + userId + "&usetType=" + usetType);
                     intent.setClass(ApplyActivity.this, CarActivity.class);
                 }
 

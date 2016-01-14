@@ -652,7 +652,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         //checkTodayUnfinishedTaskCount();
 
-        loginSuccess();
+        //loginSuccess();
     }
 
     private void logout() {
