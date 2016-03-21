@@ -37,6 +37,7 @@ public class Helper {
 
     public static final String WebUrl = "http://oa.herigbit.cn/OAFramework";
     //public static final String WebUrl = "http://leon.ngrok.cc/OAFramework";
+    //public static final String WebUrl = "http://192.168.1.13/OAFramework";
 
     public static final String AdminWebUrl = "http://www.herigbit.com/FSM";
 

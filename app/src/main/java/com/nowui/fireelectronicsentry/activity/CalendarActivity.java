@@ -224,6 +224,8 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                     intent.putExtra("taskname", map.get("taskname").toString());
                     intent.putExtra("subDeptID", map.get("subDeptID").toString());
                     intent.putExtra("subDeptName", map.get("subDeptName").toString());
+                    intent.putExtra("taskStart", map.get("taskStart").toString());
+                    intent.putExtra("taskEnd", map.get("taskEnd").toString());
                     intent.setClass(CalendarActivity.this, TaskActivity.class);
                     startActivityForResult(intent, Helper.CodeRequest);
                 }
@@ -672,8 +674,8 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                     endTime.add(Calendar.SECOND, -1);
                     //endTime.setTime(Helper.formatDate(task.getTaskend()));
                     WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
-                    event.setName(task.getSubDeptName());
-                    event.setId(Long.valueOf(task.getSubDeptID()));
+                    event.setName(task.getSubDeptName() + task.getTaskname());
+                    event.setId(Long.valueOf(task.getSubDeptID() + task.getTaskid()));
                     //event.setColor(getResources().getColor(R.color.month_remind_color));
 
                     int tempMonth = taskStartTime.get(Calendar.MONTH);
@@ -728,6 +730,10 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
         String taskName = "";
         String subDeptID = "0";
         String subDeptName = "";
+        String taskStart = "";
+        String taskEnd = "";
+
+        System.out.println(event.getId());
 
         for(Task task : monthTaskList) {
             if (Long.valueOf(task.getTaskid()).equals(event.getId())) {
@@ -736,6 +742,8 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                 taskName = task.getTaskname();
                 subDeptID = task.getSubDeptID();
                 subDeptName = task.getSubDeptName();
+                taskStart = task.getTaskstart();
+                taskEnd = task.getTaskend();
                 break;
             }
         }
@@ -747,18 +755,62 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                 taskName = task.getTaskname();
                 subDeptID = task.getSubDeptID();
                 subDeptName = task.getSubDeptName();
+                taskStart = task.getTaskstart();
+                taskEnd = task.getTaskend();
                 break;
             }
         }
 
         for(Task task : dayTaskList) {
-            if (Long.valueOf(task.getSubDeptID()).equals(event.getId())) {
-                taskType = "1";
-                taskID = task.getTaskid();
-                taskName = task.getTaskname();
-                subDeptID = task.getSubDeptID();
-                subDeptName = task.getSubDeptName();
-                break;
+            if (Long.valueOf(task.getSubDeptID() + task.getTaskid()).equals(event.getId())) {
+                SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                Date date = null;
+                try {
+                    date = sdf.parse(task.getTaskstart());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Calendar startCalendar = Calendar.getInstance();
+                startCalendar.setTime(date);
+
+                try {
+                    date = sdf.parse(task.getTaskend());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Calendar endCalendar = Calendar.getInstance();
+                endCalendar.setTime(date);
+
+                if(startCalendar.get(Calendar.YEAR) == event.getStartTime().get(Calendar.YEAR)
+                        && startCalendar.get(Calendar.MONTH) == event.getStartTime().get(Calendar.MONTH)
+                        && startCalendar.get(Calendar.DATE) == event.getStartTime().get(Calendar.DATE)
+                        && startCalendar.get(Calendar.HOUR) == event.getStartTime().get(Calendar.HOUR)
+                        && startCalendar.get(Calendar.MINUTE) == event.getStartTime().get(Calendar.MINUTE)
+                        && endCalendar.get(Calendar.YEAR) == event.getEndTime().get(Calendar.YEAR)
+                        && endCalendar.get(Calendar.MONTH) == event.getEndTime().get(Calendar.MONTH)
+                        && endCalendar.get(Calendar.DATE) == event.getEndTime().get(Calendar.DATE)
+                        && endCalendar.get(Calendar.HOUR) == event.getEndTime().get(Calendar.HOUR)
+                        && endCalendar.get(Calendar.MINUTE) == event.getEndTime().get(Calendar.MINUTE)
+                        ) {
+                    taskType = "1";
+                    taskID = task.getTaskid();
+                    taskName = task.getTaskname();
+                    subDeptID = task.getSubDeptID();
+                    subDeptName = task.getSubDeptName();
+                    taskStart = task.getTaskstart();
+                    taskEnd = task.getTaskend();
+                    break;
+                }
+
+                /*System.out.println(event.getStartTime().get(Calendar.YEAR));
+                System.out.println(event.getStartTime().get(Calendar.MONTH));
+                System.out.println(event.getStartTime().get(Calendar.DATE));
+                System.out.println(event.getStartTime().get(Calendar.HOUR));
+                System.out.println(event.getStartTime().get(Calendar.MINUTE));*/
+
             }
         }
 
@@ -778,12 +830,18 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
             intent.setClass(CalendarActivity.this, CarActivity.class);
             startActivityForResult(intent, Helper.CodeRequest);
         } else {
+            /*System.out.println(taskID);
+            System.out.println(subDeptID);
+            System.out.println(taskStart);
+            System.out.println(taskEnd);*/
             Intent intent = new Intent();
             intent.putExtra("taskType", taskType);
             intent.putExtra("taskid", String.valueOf(taskID));
             intent.putExtra("taskname", taskName);
             intent.putExtra("subDeptID", subDeptID);
             intent.putExtra("subDeptName", subDeptName);
+            intent.putExtra("taskStart", taskStart);
+            intent.putExtra("taskEnd", taskEnd);
             intent.setClass(CalendarActivity.this, TaskActivity.class);
             startActivityForResult(intent, Helper.CodeRequest);
         }
@@ -848,7 +906,9 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                     map.put("taskstart", task.getTaskstart());
                     map.put("taskend", task.getTaskend());
                     map.put("subDeptID", task.getSubDeptID());
-                    map.put("subDeptName", task.getSubDeptName());
+                    map.put("subDeptName", task.getSubDeptName() + task.getTaskname());
+                    map.put("taskStart", task.getTaskstart());
+                    map.put("taskEnd", task.getTaskend());
 
                     monthAndWeekListForDay.add(map);
                 }
@@ -867,7 +927,9 @@ public class CalendarActivity extends AppCompatActivity implements WeekView.Mont
                 map.put("taskstart", monthTaskStart);
                 map.put("taskend", monthTaskEnd);
                 map.put("subDeptID", task.getSubDeptID());
-                map.put("subDeptName", task.getSubDeptName());
+                map.put("subDeptName", task.getSubDeptName() + task.getTaskname());
+                map.put("taskStart", "");
+                map.put("taskEnd", "");
 
                 monthAndWeekListForDay.add(map);
             }

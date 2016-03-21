@@ -92,6 +92,8 @@ public class TaskActivity extends AppCompatActivity {
     private String deptPatrolID;
     private String subDeptID;
     private String subDeptName;
+    private String taskStart;
+    private String taskEnd;
     private List<TaskAbnormal> taskAbnormalList;
     private final DbHelper dbHelper = new DbHelper(this, Helper.DatabaseName, null, Helper.DatabaseVersion);
     private List<byte[]> pictureList = new ArrayList<byte[]>();
@@ -128,6 +130,8 @@ public class TaskActivity extends AppCompatActivity {
         taskname = getIntent().getStringExtra("taskname");
         subDeptID = getIntent().getStringExtra("subDeptID");
         subDeptName = getIntent().getStringExtra("subDeptName");
+        taskStart = getIntent().getStringExtra("taskStart");
+        taskEnd = getIntent().getStringExtra("taskEnd");
 
         textView = (TextView) findViewById(R.id.textView);
         textView.setText(subDeptName + "-" + taskname);
@@ -156,6 +160,8 @@ public class TaskActivity extends AppCompatActivity {
         dataObject.put("taskid", Integer.valueOf(taskid));
         dataObject.put("subDeptID", Integer.valueOf(subDeptID));
         dataObject.put("subDeptName", subDeptName);
+        dataObject.put("taskStartDatetime", taskStart);
+        dataObject.put("taskEndDatetime", taskEnd);
         dataObject.put("eventType", Integer.valueOf(taskType));
         jsonObject.put("data", dataObject);
 
